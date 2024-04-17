@@ -53,16 +53,18 @@ bool comp(const pair<int,int> & p1,const pair<int,int>& p2){
     return p1.first<p2.first;
 }
 void solve(){
-    int n,q;cin>>n>>q;
-    vi a(n);
-    for(int i=0;i<n;i++) cin>>a[i];
-    vector<vector<int>> dp(n+1,vector<int> (2,INT_MIN));
-    dp[0][0] = a[0];
-    for(int i=1;i<n;i++){
-        dp[i][0] = max(dp[i-1][0],max(a[i],dp[i-1][1]+a[i]));
-        dp[i][1] = max(dp[i-1][1],max(-a[i],dp[i-1][0]-a[i]));
+    int n;cin>>n;
+    map<int,int> mpp;
+    int x,ans=0;
+    for(int i=0;i<n;i++){
+        cin>>x;
+        if(!mpp[x]){
+            ans++;mpp[((1<<31)-1)^x]++;
+        }else{
+            mpp[x]--;
+        }
     }
-    cout<<max(dp[n-1][0],dp[n-1][1])<<endl;
+    cout<<ans<<endl;
     return;
 }
 signed main(){

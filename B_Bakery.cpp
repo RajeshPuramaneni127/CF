@@ -1,4 +1,4 @@
-// Rajesh :: PDTX
+// Rajesh :: QDTX
 #include <bits/stdc++.h>
 #include <cstdio>
 #include <cstring>
@@ -79,20 +79,28 @@ bool comp2(vector<int>& a,vector<int>&b){
 }
 
 void solve(){
-    int n;cin>>n;
-    string s;cin>>s;
-    string ans="";char prev = s[0];ans+=s[0];
-    for(int i=1;i<n;i++){
-        if(s[i]==prev) continue;
-        if(prev=='0'){
-            ans+=s[i];prev=s[i];
-        }else{
-            ans+=s[i];prev='0';
+    int n,m,k;cin>>n>>m>>k;
+    vector<pair<int,int>> adj[n+1];
+    int x,y,l;
+    for(int i=0;i<m;i++){
+        cin>>x>>y>>l;
+        adj[x].push_back({y,l});
+        adj[y].push_back({x,l});
+    }
+    vi flag(n+1,0),a(k);
+    for(int i=0;i<k;i++){
+        cin>>a[i];flag[a[i]]=1;
+    }
+    int ans= INT_MAX;
+    for(int i=0;i<k;i++){
+        for(auto u:adj[a[i]]){
+            if(!flag[u.first]){
+                ans = min(ans,u.second);
+            }
         }
     }
-    if(ans.length()%2) ans.pop_back();
-    cout<<n-ans.length()<<endl;
-    cout<<ans<<endl;
+    if(ans==INT_MAX) cout<<"-1"<<endl;
+    else cout<<ans<<endl;
     return;
 }
 

@@ -78,23 +78,14 @@ bool comp2(vector<int>& a,vector<int>&b){
     return a[2]<b[2];
 }
 
-void solve(){
-    int n;cin>>n;
-    string s;cin>>s;
-    string ans="";char prev = s[0];ans+=s[0];
-    for(int i=1;i<n;i++){
-        if(s[i]==prev) continue;
-        if(prev=='0'){
-            ans+=s[i];prev=s[i];
-        }else{
-            ans+=s[i];prev='0';
-        }
-    }
-    if(ans.length()%2) ans.pop_back();
-    cout<<n-ans.length()<<endl;
+void solve() {
+    int n,k;cin>>n>>k;
+    int ans = (n*k-1)/(n-1);
+    // if(ans%n==0) ans++;
     cout<<ans<<endl;
     return;
 }
+
 
 signed main(){  
     ios::sync_with_stdio(false);
@@ -107,7 +98,7 @@ signed main(){
     #endif
     */
     int t=1;
-    // cin>>t;
+    cin>>t;
     for(int i=1;i<=t;i++){
         //cout<<"Case #"<<i<<": ";
         solve();

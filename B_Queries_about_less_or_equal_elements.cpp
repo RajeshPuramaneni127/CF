@@ -53,16 +53,15 @@ bool comp(const pair<int,int> & p1,const pair<int,int>& p2){
     return p1.first<p2.first;
 }
 void solve(){
-    int n,q;cin>>n>>q;
-    vi a(n);
+    int n,m;cin>>n>>m;
+    vi a(n),b(m);
     for(int i=0;i<n;i++) cin>>a[i];
-    vector<vector<int>> dp(n+1,vector<int> (2,INT_MIN));
-    dp[0][0] = a[0];
-    for(int i=1;i<n;i++){
-        dp[i][0] = max(dp[i-1][0],max(a[i],dp[i-1][1]+a[i]));
-        dp[i][1] = max(dp[i-1][1],max(-a[i],dp[i-1][0]-a[i]));
-    }
-    cout<<max(dp[n-1][0],dp[n-1][1])<<endl;
+    for(int i=0;i<m;i++) cin>>b[i];
+    sort(all(a));
+    for(int i=0;i<m;i++){
+        int ans = upper_bound(all(a),b[i])-a.begin();
+        cout<<ans<<" ";
+    }cout<<endl;
     return;
 }
 signed main(){
@@ -72,7 +71,7 @@ signed main(){
     // freopen("input.txt", "r" , stdin);
     // freopen("output.txt", "w", stdout);
     int t=1;
-    cin>>t;
+    // cin>>t;
     for(int i=1;i<=t;i++){
         //cout<<"Case #"<<i<<": ";
         solve();

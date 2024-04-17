@@ -79,20 +79,36 @@ bool comp2(vector<int>& a,vector<int>&b){
 }
 
 void solve(){
-    int n;cin>>n;
-    string s;cin>>s;
-    string ans="";char prev = s[0];ans+=s[0];
-    for(int i=1;i<n;i++){
-        if(s[i]==prev) continue;
-        if(prev=='0'){
-            ans+=s[i];prev=s[i];
-        }else{
-            ans+=s[i];prev='0';
+    int m;cin>>m;
+    string a,b;cin>>a>>b;
+    int prev;
+    if(a[0]=='W' && b[0]=='W'){
+        PNO;return;
+    }else if(a[0]=='B' && b[0]=='B'){
+        prev = 2;
+    }else if(a[0]=='B' && b[0]=='W') prev=0;
+    else prev=1;
+    for(int i=1;i<m;i++){
+        if(a[i]=='W' && b[i]=='W'){
+            PNO;return;
         }
+        if(prev==0){
+            if(a[i]!='B'){
+                PNO;return;
+            }
+            if(b[i]=='B') prev=1;
+        }else if(prev==1){
+            if(b[i]!='B'){
+                PNO;return;
+            }if(a[i]=='B') prev=0;
+        }else{
+            if(a[i]=='B' && b[i]=='B') prev=2;
+            else if(a[i]=='B') prev=0;
+            else prev=1;
+        }
+        // cout<<prev<<" ";
     }
-    if(ans.length()%2) ans.pop_back();
-    cout<<n-ans.length()<<endl;
-    cout<<ans<<endl;
+    PYES;
     return;
 }
 
@@ -107,7 +123,7 @@ signed main(){
     #endif
     */
     int t=1;
-    // cin>>t;
+    cin>>t;
     for(int i=1;i<=t;i++){
         //cout<<"Case #"<<i<<": ";
         solve();
